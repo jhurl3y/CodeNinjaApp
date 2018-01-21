@@ -8,17 +8,14 @@
     android:background="@color/colorBackgroundWhite"
     tools:context=".ViewActivity">
 
-    <include
-        android:id="@+id/toolbarView"
-        layout="@layout/toolbar" />
-
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:tint="@android:color/white" />
 
 </RelativeLayout>

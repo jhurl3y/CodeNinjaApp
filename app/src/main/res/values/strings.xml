@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CodeNinja</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_edit">EditActivity</string>
-    <string name="title_activity_view">ViewActivity</string>
+    <string name="title_activity_main">Notes</string>
+    <string name="title_activity_edit">Notes</string>
+    <string name="title_activity_view">Notes</string>
+    <string name="delete_all">Delete All Notes</string>
 </resources>
