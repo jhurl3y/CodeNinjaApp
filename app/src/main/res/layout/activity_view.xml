@@ -12,6 +12,31 @@
         android:id="@+id/toolbarView"
         layout="@layout/toolbar" />
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/toolbarView"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Note 1: Fury Road"
+        android:textColor="@color/title"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/title"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
+        android:textColor="@color/title"
+        android:textSize="16dp"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_edit"
         android:layout_width="wrap_content"
