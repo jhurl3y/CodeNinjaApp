@@ -10,6 +10,9 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEdit);
+        setSupportActionBar(toolbar);
     }
 
 }

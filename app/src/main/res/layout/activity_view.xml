@@ -8,6 +8,10 @@
     android:background="@color/colorBackgroundWhite"
     tools:context=".ViewActivity">
 
+    <include
+        android:id="@+id/toolbarView"
+        layout="@layout/toolbar" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_edit"
         android:layout_width="wrap_content"

@@ -8,4 +8,8 @@
     android:background="@color/colorBackgroundWhite"
     tools:context=".EditActivity">
 
+    <include
+        android:id="@+id/toolbarEdit"
+        layout="@layout/toolbar" />
+
 </RelativeLayout>

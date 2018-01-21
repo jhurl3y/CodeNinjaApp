@@ -12,14 +12,12 @@
         android:id="@+id/toolbarMain"
         layout="@layout/toolbar" />
 
-    <ListView
-        android:id="@+id/noteList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/notes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/toolbarMain"></ListView>
+        android:layout_below="@id/toolbarMain"
+        android:scrollbars="vertical" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
