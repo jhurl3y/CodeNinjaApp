@@ -45,6 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_menu_edit"
-        android:tint="@android:color/white" />
+        android:tint="@android:color/white"
+        android:onClick="editNote"/>
 
 </RelativeLayout>

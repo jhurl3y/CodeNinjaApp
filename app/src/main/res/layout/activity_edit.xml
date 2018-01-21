@@ -12,4 +12,52 @@
         android:id="@+id/toolbarEdit"
         layout="@layout/toolbar" />
 
+    <EditText
+        android:id="@+id/editTitle"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Note 1: Fury Road"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/toolbarEdit"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/title"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/editScrollView"
+        android:layout_below="@+id/editTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editContent"
+            android:inputType="textCapSentences|textImeMultiLine|textMultiLine"
+            android:gravity="start|end"
+            android:ems="10"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:hint="hey"
+            android:maxLines="2000"
+            android:textSize="18sp"
+            android:text="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
+            android:textColorHint="@color/title"
+            android:textColor="@color/title"
+            android:background="@android:color/transparent"/>
+
+    </ScrollView>
+
 </RelativeLayout>
