@@ -35,11 +35,11 @@ public class NotesTable {
         database.execSQL("insert into " + TABLE_NOTES + "(" +
                 COLUMN_ID + "," + COLUMN_TITLE + "," + COLUMN_CONTENT + "," +
                 COLUMN_CREATED_AT + "," + COLUMN_UPDATED_AT +
-                ") values(1, 'Note 1', 'This is my first note', '2002-09-24-06:00', '2002-09-24-06:00')");
+                ") values(1, 'Note 1', 'This is my first note', '2016-02-03 00:00:00Z', '2016-02-03 00:00:00Z')");
         database.execSQL("insert into " + TABLE_NOTES + "(" +
                 COLUMN_ID + "," + COLUMN_TITLE + "," + COLUMN_CONTENT + "," +
                 COLUMN_CREATED_AT + "," + COLUMN_UPDATED_AT +
-                ") values(2, 'Note 2', 'This is my second note', '2002-09-24-06:00', '2002-09-24-06:00')");
+                ") values(2, 'Note 2', 'This is my second note', '2016-02-03 00:00:00Z', '2015-01-03 00:00:00Z')");
     }
 
     public static void onUpgrade(SQLiteDatabase database, int oldVersion,

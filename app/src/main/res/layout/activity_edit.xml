@@ -13,7 +13,7 @@
         layout="@layout/toolbar" />
 
     <EditText
-        android:id="@+id/editTitle"
+        android:id="@+id/edit_title"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Note 1: Fury Road"
@@ -27,13 +27,15 @@
         android:textColor="@color/title"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:hint="Title.."
+        android:textColorHint="@color/date"
         tools:layout_editor_absoluteY="16dp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/editScrollView"
-        android:layout_below="@+id/editTitle"
+        android:layout_below="@+id/edit_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -44,17 +46,17 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editContent"
+            android:id="@+id/edit_content"
             android:inputType="textCapSentences|textImeMultiLine|textMultiLine"
             android:gravity="start|end"
             android:ems="10"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:hint="hey"
+            android:hint="So this is your note.."
             android:maxLines="2000"
             android:textSize="18sp"
             android:text="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
-            android:textColorHint="@color/title"
+            android:textColorHint="@color/date"
             android:textColor="@color/title"
             android:background="@android:color/transparent"/>
 

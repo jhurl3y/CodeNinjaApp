@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class ViewActivity extends AppCompatActivity {
+
+    public TextView titleText, contentText;
+    private String title = "", content = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,15 @@ public class ViewActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        titleText = (TextView) findViewById(R.id.view_title);
+        contentText = (TextView) findViewById(R.id.view_content);
+
+        title = getIntent().getStringExtra("NOTE_TITLE");
+        content = getIntent().getStringExtra("NOTE_CONTENT");
+
+        titleText.setText(title);
+        contentText.setText(content);
     }
 
     @Override
@@ -36,6 +49,10 @@ public class ViewActivity extends AppCompatActivity {
 
     public void editNote(View view) {
         Intent intent = new Intent(this, EditActivity.class);
+
+        intent.putExtra("NOTE_TITLE", title);
+        intent.putExtra("NOTE_CONTENT", content);
+
         this.startActivity(intent);
     }
 

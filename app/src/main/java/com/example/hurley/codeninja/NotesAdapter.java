@@ -3,13 +3,18 @@ package com.example.hurley.codeninja;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;import android.view.LayoutInflater;
+import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.hurley.codeninja.database.NotesTable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder> {
@@ -20,7 +25,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     private int mRowIdColumn;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView title, date, content;
+        public TextView titleText, dateText, contentText;
+        private String title = "", content = "", date = "";
         private final Context context;
 
         public MyViewHolder(View view) {
@@ -28,15 +34,32 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
             context = view.getContext();
             view.setOnClickListener(this);
 
-            title = (TextView) view.findViewById(R.id.title);
-            content = (TextView) view.findViewById(R.id.content);
-            date = (TextView) view.findViewById(R.id.date);
+            titleText = (TextView) view.findViewById(R.id.title);
+            contentText = (TextView) view.findViewById(R.id.content);
+            dateText = (TextView) view.findViewById(R.id.date);
         }
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, ViewActivity.class);
+            intent.putExtra("NOTE_TITLE", title);
+            intent.putExtra("NOTE_CONTENT", content);
+
             context.startActivity(intent);
+        }
+
+        public void updateView(String title, String content, String date) throws ParseException {
+            this.titleText.setText(title);
+            this.title = title;
+
+            this.contentText.setText(content);
+            this.content = content;
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss'Z'");
+            Date d = format.parse(date);
+
+            this.dateText.setText(new SimpleDateFormat("hh:mm d MMM").format(d));
+            this.date = date;
         }
     }
 
@@ -79,13 +102,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
         mCursor.moveToPosition(position);
 
+        //Long id = mCursor.getLong(mCursor.getColumnIndex(NotesTable.COLUMN_ID));
         String title = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_TITLE));
         String content = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_CONTENT));
         String date = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_UPDATED_AT));
 
-        holder.title.setText(title);
-        holder.content.setText(content);
-        holder.date.setText(date);
+        try {
+            holder.updateView(title, content, date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public Cursor swapCursor(Cursor newCursor) {
