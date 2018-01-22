@@ -12,6 +12,7 @@ public class EditActivity extends AppCompatActivity {
 
     public EditText titleText, contentText;
     private String title = "", content = "";
+    private long id = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class EditActivity extends AppCompatActivity {
         titleText = (EditText) findViewById(R.id.edit_title);
         contentText = (EditText) findViewById(R.id.edit_content);
 
+        id = getIntent().getLongExtra("NOTE_ID", -1);
         title = getIntent().getStringExtra("NOTE_TITLE");
         content = getIntent().getStringExtra("NOTE_CONTENT");
 

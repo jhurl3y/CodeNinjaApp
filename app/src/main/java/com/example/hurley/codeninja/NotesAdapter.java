@@ -27,6 +27,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView titleText, dateText, contentText;
         private String title = "", content = "", date = "";
+        private long id = -1;
         private final Context context;
 
         public MyViewHolder(View view) {
@@ -42,6 +43,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, ViewActivity.class);
+            intent.putExtra("NOTE_ID", id);
             intent.putExtra("NOTE_TITLE", title);
             intent.putExtra("NOTE_CONTENT", content);
 
@@ -60,6 +62,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
             this.dateText.setText(new SimpleDateFormat("hh:mm d MMM").format(d));
             this.date = date;
+        }
+
+        public void passId(long id){
+            this.id = id;
         }
     }
 
@@ -102,7 +108,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
         mCursor.moveToPosition(position);
 
-        //Long id = mCursor.getLong(mCursor.getColumnIndex(NotesTable.COLUMN_ID));
+        Long id = mCursor.getLong(mCursor.getColumnIndex(NotesTable.COLUMN_ID));
         String title = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_TITLE));
         String content = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_CONTENT));
         String date = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_UPDATED_AT));
@@ -112,6 +118,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        holder.passId(id);
     }
 
     public Cursor swapCursor(Cursor newCursor) {

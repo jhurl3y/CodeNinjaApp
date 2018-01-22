@@ -269,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void createNote(View view) {
         Intent intent = new Intent(this, EditActivity.class);
 
+        intent.putExtra("NOTE_ID", -1);
         intent.putExtra("NOTE_TITLE", "");
         intent.putExtra("NOTE_CONTENT", "");
 
