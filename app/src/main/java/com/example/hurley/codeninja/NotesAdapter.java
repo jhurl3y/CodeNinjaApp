@@ -2,16 +2,22 @@ package com.example.hurley.codeninja;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hurley.codeninja.database.NotesTable;
+
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder> {
 
-    private List<Note> NotesList;
+    private Context mContext;
+    private Cursor mCursor;
+    private boolean mDataValid;
+    private int mRowIdColumn;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView title, date, content;
@@ -20,7 +26,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         public MyViewHolder(View view) {
             super(view);
             context = view.getContext();
-
             view.setOnClickListener(this);
 
             title = (TextView) view.findViewById(R.id.title);
@@ -35,8 +40,31 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         }
     }
 
-    public NotesAdapter(List<Note> NotesList) {
-        this.NotesList = NotesList;
+    public NotesAdapter(Context context, Cursor cursor) {
+        mContext = context;
+        mCursor = cursor;
+        mDataValid = cursor != null;
+        mRowIdColumn = mDataValid ? mCursor.getColumnIndex("id") : -1;
+    }
+
+    public Cursor getCursor() {
+        return mCursor;
+    }
+
+    @Override
+    public int getItemCount() {
+        if (mDataValid && mCursor != null) {
+            return mCursor.getCount();
+        }
+        return 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        if (mDataValid && mCursor != null && mCursor.moveToPosition(position)) {
+            return mCursor.getLong(mRowIdColumn);
+        }
+        return 0;
     }
 
     @Override
@@ -49,25 +77,43 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Note Note = NotesList.get(position);
+        mCursor.moveToPosition(position);
 
-        // we need to show the "normal" state
-        holder.title.setText(Note.getTitle());
-        holder.content.setText(Note.getContent());
-        holder.date.setText(Note.getDate());
+        String title = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_TITLE));
+        String content = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_CONTENT));
+        String date = mCursor.getString(mCursor.getColumnIndex(NotesTable.COLUMN_UPDATED_AT));
+
+        holder.title.setText(title);
+        holder.content.setText(content);
+        holder.date.setText(date);
     }
 
-    @Override
-    public int getItemCount() {
-        return NotesList.size();
+    public Cursor swapCursor(Cursor newCursor) {
+        if (newCursor == mCursor) {
+            return null;
+        }
+
+        final Cursor oldCursor = mCursor;
+        mCursor = newCursor;
+
+        if (mCursor != null) {
+            mRowIdColumn = newCursor.getColumnIndexOrThrow("id");
+            mDataValid = true;
+            notifyDataSetChanged();
+        } else {
+            mRowIdColumn = -1;
+            mDataValid = false;
+            notifyDataSetChanged();
+        }
+        return oldCursor;
     }
 
     public void remove(int position) {
-        Note Note = NotesList.get(position);
-
-        if (NotesList.contains(Note)) {
-            NotesList.remove(position);
-            notifyItemRemoved(position);
-        }
+//        Note Note = NotesList.get(position);
+//
+//        if (NotesList.contains(Note)) {
+//            NotesList.remove(position);
+//            notifyItemRemoved(position);
+//        }
     }
 }

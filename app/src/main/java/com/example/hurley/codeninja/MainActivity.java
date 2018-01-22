@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,12 +33,13 @@ import com.example.hurley.codeninja.database.NotesTable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private List<Note> NoteList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NotesAdapter mAdapter;
     private SimpleCursorAdapter adapter;
+    private int LOADER_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,14 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         prepareNoteData();
-        mAdapter = new NotesAdapter(NoteList);
+        mAdapter = new NotesAdapter(this, null);
 
         setUpRecyclerView();
 
-        //getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(LOADER_ID, null, this);
+
+        setUpItemTouchHelper();
+        setUpAnimationDecoratorHelper();
     }
 
     @Override
@@ -75,9 +80,21 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         recyclerView.setAdapter(mAdapter);
+    }
 
-        setUpItemTouchHelper();
-        setUpAnimationDecoratorHelper();
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, NotesContentProvider.CONTENT_URI, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
     }
 
     /**
@@ -252,21 +269,6 @@ public class MainActivity extends AppCompatActivity{
     public void createNote(View view) {
         Intent intent = new Intent(this, EditActivity.class);
         this.startActivity(intent);
-//
-//        String URL = "content://com.example.hurley.notes.contentprovider";
-//
-//        Uri notes = Uri.parse(URL);
-//        Cursor c = managedQuery(notes, null, null, null, "id");
-//
-//        if (c.moveToFirst()) {
-//            do {
-//                Toast.makeText(this,
-//                        c.getString(c.getColumnIndex(NotesTable.COLUMN_ID)) +
-//                                ", " + c.getString(c.getColumnIndex(NotesTable.COLUMN_TITLE)) +
-//                                ", " + c.getString(c.getColumnIndex(NotesTable.COLUMN_CONTENT)),
-//                        Toast.LENGTH_SHORT).show();
-//            } while (c.moveToNext());
-//        }
     }
 
     private void prepareNoteData() {
@@ -283,21 +285,4 @@ public class MainActivity extends AppCompatActivity{
         NoteList.add(note);
     }
 
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-//        String[] projection = { NotesTable.COLUMN_ID, NotesTable.COLUMN_TITLE };
-//        CursorLoader cursorLoader = new CursorLoader(this,
-//                NotesContentProvider.CONTENT_URI, projection, null, null, null);
-//        return cursorLoader;
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-//        adapter.swapCursor(cursor);
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<Cursor> loader) {
-//        adapter.swapCursor(null);
-//    }
 }

@@ -22,26 +22,22 @@ public class NotesContentProvider extends ContentProvider {
     // database
     private NotesDatabaseHelper database;
 
-    // used for the UriMacher
-    private static final int NOTES = 10;
-    private static final int NOTE_ID = 20;
+    // used for the UriMatcher
+    private static final int NOTES = 1;
+    private static final int NOTE_ID = 2;
 
     private static final String AUTHORITY = "com.example.hurley.notes.contentprovider";
 
-    private static final String BASE_PATH = "notes";
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
-            + "/" + BASE_PATH);
+    private static final String NOTES_TABLE = "notes";
+    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + NOTES_TABLE);
 
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
-            + "/notes";
-    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
-            + "/notes";
+    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/notes";
+    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/notes";
 
-    private static final UriMatcher sURIMatcher = new UriMatcher(
-            UriMatcher.NO_MATCH);
+    private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        sURIMatcher.addURI(AUTHORITY, BASE_PATH, NOTES);
-        sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", NOTE_ID);
+        sURIMatcher.addURI(AUTHORITY, NOTES_TABLE, NOTES);
+        sURIMatcher.addURI(AUTHORITY, NOTES_TABLE + "/#", NOTE_ID);
     }
 
     @Override
@@ -64,6 +60,7 @@ public class NotesContentProvider extends ContentProvider {
         queryBuilder.setTables(NotesTable.TABLE_NOTES);
 
         int uriType = sURIMatcher.match(uri);
+
         switch (uriType) {
             case NOTES:
                 break;
@@ -76,7 +73,7 @@ public class NotesContentProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
 
-        SQLiteDatabase db = database.getWritableDatabase();
+        SQLiteDatabase db = database.getReadableDatabase();
         Cursor cursor = queryBuilder.query(db, projection, selection,
                 selectionArgs, null, null, sortOrder);
         // make sure that potential listeners are getting notified
@@ -94,6 +91,7 @@ public class NotesContentProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB = database.getWritableDatabase();
+
         long id = 0;
         switch (uriType) {
             case NOTES:
@@ -103,7 +101,7 @@ public class NotesContentProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
-        return Uri.parse(BASE_PATH + "/" + id);
+        return Uri.parse(NOTES_TABLE + "/" + id);
     }
 
     @Override
@@ -111,6 +109,7 @@ public class NotesContentProvider extends ContentProvider {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB = database.getWritableDatabase();
         int rowsDeleted = 0;
+
         switch (uriType) {
             case NOTES:
                 rowsDeleted = sqlDB.delete(NotesTable.TABLE_NOTES, selection,
@@ -134,6 +133,7 @@ public class NotesContentProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
+
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsDeleted;
     }
@@ -145,6 +145,7 @@ public class NotesContentProvider extends ContentProvider {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB = database.getWritableDatabase();
         int rowsUpdated = 0;
+
         switch (uriType) {
             case NOTES:
                 rowsUpdated = sqlDB.update(NotesTable.TABLE_NOTES,
@@ -171,6 +172,7 @@ public class NotesContentProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
+
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsUpdated;
     }
