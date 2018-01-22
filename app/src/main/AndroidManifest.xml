@@ -26,6 +26,10 @@
             android:name=".ViewActivity"
             android:label="@string/title_activity_view"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <provider
+            android:name=".contentprovider.NotesContentProvider"
+            android:authorities="com.example.hurley.notes.contentprovider" >
+        </provider>
     </application>
 
 </manifest>

@@ -1,11 +1,16 @@
 package com.example.hurley.codeninja;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +23,21 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
+
+import com.example.hurley.codeninja.contentprovider.NotesContentProvider;
+import com.example.hurley.codeninja.database.NotesTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private List<Note> NoteList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NotesAdapter mAdapter;
+    private SimpleCursorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new NotesAdapter(NoteList);
 
         setUpRecyclerView();
+
+        //getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -238,6 +252,21 @@ public class MainActivity extends AppCompatActivity {
     public void createNote(View view) {
         Intent intent = new Intent(this, EditActivity.class);
         this.startActivity(intent);
+//
+//        String URL = "content://com.example.hurley.notes.contentprovider";
+//
+//        Uri notes = Uri.parse(URL);
+//        Cursor c = managedQuery(notes, null, null, null, "id");
+//
+//        if (c.moveToFirst()) {
+//            do {
+//                Toast.makeText(this,
+//                        c.getString(c.getColumnIndex(NotesTable.COLUMN_ID)) +
+//                                ", " + c.getString(c.getColumnIndex(NotesTable.COLUMN_TITLE)) +
+//                                ", " + c.getString(c.getColumnIndex(NotesTable.COLUMN_CONTENT)),
+//                        Toast.LENGTH_SHORT).show();
+//            } while (c.moveToNext());
+//        }
     }
 
     private void prepareNoteData() {
@@ -253,4 +282,22 @@ public class MainActivity extends AppCompatActivity {
         note = new Note("Note 4: Shaun the Sheep", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque", " Apr 2015");
         NoteList.add(note);
     }
+
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+//        String[] projection = { NotesTable.COLUMN_ID, NotesTable.COLUMN_TITLE };
+//        CursorLoader cursorLoader = new CursorLoader(this,
+//                NotesContentProvider.CONTENT_URI, projection, null, null, null);
+//        return cursorLoader;
+//    }
+//
+//    @Override
+//    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+//        adapter.swapCursor(cursor);
+//    }
+//
+//    @Override
+//    public void onLoaderReset(Loader<Cursor> loader) {
+//        adapter.swapCursor(null);
+//    }
 }
