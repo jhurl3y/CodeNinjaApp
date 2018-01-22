@@ -35,7 +35,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
         }
     }
 
-
     public NotesAdapter(List<Note> NotesList) {
         this.NotesList = NotesList;
     }
@@ -50,7 +49,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Note Note = NotesList.get(position);
+        final Note Note = NotesList.get(position);
+
+        // we need to show the "normal" state
         holder.title.setText(Note.getTitle());
         holder.content.setText(Note.getContent());
         holder.date.setText(Note.getDate());
@@ -59,5 +60,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     @Override
     public int getItemCount() {
         return NotesList.size();
+    }
+
+    public void remove(int position) {
+        Note Note = NotesList.get(position);
+
+        if (NotesList.contains(Note)) {
+            NotesList.remove(position);
+            notifyItemRemoved(position);
+        }
     }
 }
