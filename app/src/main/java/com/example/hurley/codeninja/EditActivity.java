@@ -1,6 +1,7 @@
 package com.example.hurley.codeninja;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,12 @@ public class EditActivity extends AppCompatActivity {
                     createNote();
                 } else{
                     editNote();
+
+                    Intent data = new Intent();
+                    data.putExtra("NOTE_TITLE",title);
+                    data.putExtra("NOTE_CONTENT",content);
+
+                    setResult(RESULT_OK, data);
                 }
 
                 finish();
@@ -59,8 +66,11 @@ public class EditActivity extends AppCompatActivity {
     public void createNote(){
         ContentValues values = new ContentValues();
 
-        values.put(NotesTable.COLUMN_TITLE, String.valueOf(titleText.getText()));
-        values.put(NotesTable.COLUMN_CONTENT, String.valueOf(contentText.getText()));
+        title = String.valueOf(titleText.getText());
+        content = String.valueOf(contentText.getText());
+
+        values.put(NotesTable.COLUMN_TITLE, title);
+        values.put(NotesTable.COLUMN_CONTENT, content);
 
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         values.put(NotesTable.COLUMN_CREATED_AT, date);
@@ -72,8 +82,11 @@ public class EditActivity extends AppCompatActivity {
     public void editNote(){
         ContentValues values = new ContentValues();
 
-        values.put(NotesTable.COLUMN_TITLE, String.valueOf(titleText.getText()));
-        values.put(NotesTable.COLUMN_CONTENT, String.valueOf(contentText.getText()));
+        title = String.valueOf(titleText.getText());
+        content = String.valueOf(contentText.getText());
+
+        values.put(NotesTable.COLUMN_TITLE, title);
+        values.put(NotesTable.COLUMN_CONTENT, content);
 
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         values.put(NotesTable.COLUMN_UPDATED_AT, date);

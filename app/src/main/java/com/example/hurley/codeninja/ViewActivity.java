@@ -14,6 +14,8 @@ public class ViewActivity extends AppCompatActivity {
     private String title = "", content = "";
     private long id = -1;
 
+    private int editActivityCode = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,19 @@ public class ViewActivity extends AppCompatActivity {
         intent.putExtra("NOTE_TITLE", title);
         intent.putExtra("NOTE_CONTENT", content);
 
-        this.startActivity(intent);
+        startActivityForResult(intent, editActivityCode);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == editActivityCode) {
+            if (resultCode == RESULT_OK) {
+                title = data.getStringExtra("NOTE_TITLE");
+                content = data.getStringExtra("NOTE_CONTENT");
+
+                titleText.setText(title);
+                contentText.setText(content);
+            }
+        }
     }
 
 }
