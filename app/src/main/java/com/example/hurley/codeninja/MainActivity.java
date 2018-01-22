@@ -35,7 +35,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
-    private List<Note> NoteList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NotesAdapter mAdapter;
     private SimpleCursorAdapter adapter;
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
 
-        prepareNoteData();
         mAdapter = new NotesAdapter(this, null);
 
         setUpRecyclerView();
@@ -274,20 +272,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         intent.putExtra("NOTE_CONTENT", "");
 
         this.startActivity(intent);
-    }
-
-    private void prepareNoteData() {
-        Note note = new Note("Note 1: Fury Road", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque", "Jan 2015");
-        NoteList.add(note);
-
-        note = new Note("Note 2: Inside Out", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque", " Feb 2015");
-        NoteList.add(note);
-
-        note = new Note("Note 3: Star Wars", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque", " Mar 2015");
-        NoteList.add(note);
-
-        note = new Note("Note 4: Shaun the Sheep", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque", " Apr 2015");
-        NoteList.add(note);
     }
 
 }
