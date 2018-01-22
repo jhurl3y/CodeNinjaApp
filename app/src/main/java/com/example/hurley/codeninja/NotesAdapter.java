@@ -4,18 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hurley.codeninja.contentprovider.NotesContentProvider;
 import com.example.hurley.codeninja.database.NotesTable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder> {
 
@@ -143,11 +142,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     }
 
     public void remove(int position) {
-//        Note Note = NotesList.get(position);
-//
-//        if (NotesList.contains(Note)) {
-//            NotesList.remove(position);
-//            notifyItemRemoved(position);
-//        }
+        mCursor.moveToPosition(position);
+        Long id = mCursor.getLong(mCursor.getColumnIndex(NotesTable.COLUMN_ID));
+
+        mContext.getContentResolver().delete(NotesContentProvider.CONTENT_URI,NotesTable.COLUMN_ID+"=?",new String[] {String.valueOf(id)});
     }
 }
