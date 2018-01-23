@@ -66,6 +66,10 @@ public class EditActivity extends AppCompatActivity {
         title = String.valueOf(titleText.getText());
         content = String.valueOf(contentText.getText());
 
+        if (title.matches("") && content.matches("")) {
+            return;
+        }
+
         values.put(NotesTable.COLUMN_TITLE, title);
         values.put(NotesTable.COLUMN_CONTENT, content);
 

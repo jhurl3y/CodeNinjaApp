@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
             titleText = (TextView) view.findViewById(R.id.title);
             contentText = (TextView) view.findViewById(R.id.content);
             dateText = (TextView) view.findViewById(R.id.date);
+
+            titleText.setEllipsize(TextUtils.TruncateAt.END);
+            titleText.setMaxLines(2);
+
+            contentText.setEllipsize(TextUtils.TruncateAt.END);
+            contentText.setMaxLines(2);
         }
 
         @Override
