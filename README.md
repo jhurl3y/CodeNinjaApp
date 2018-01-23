@@ -7,4 +7,4 @@ This is the source code for the Code Ninja Application, presented during the And
 ![Alt text](designs/pic_three.png)
 
 ## APK
-[APK file](app/build/outputs/apk/debug/app-debug.apk)
+[APK file](presentation/my_notes.apk)
