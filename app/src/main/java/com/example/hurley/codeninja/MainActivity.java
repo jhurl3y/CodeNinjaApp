@@ -25,10 +25,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 import com.example.hurley.codeninja.contentprovider.NotesContentProvider;
-import com.example.hurley.codeninja.database.NotesTable;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -191,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     /**
-     * We're gonna setup another ItemDecorator that will draw the red background in the empty space while the items are animating to thier new positions
+     * We're gonna setup another ItemDecorator that will draw the red background in the empty space while the items are animating to their new positions
      * after an item is removed.
      */
     private void setUpAnimationDecoratorHelper() {

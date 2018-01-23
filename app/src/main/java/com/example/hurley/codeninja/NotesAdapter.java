@@ -66,7 +66,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date d = format.parse(date);
 
-            this.dateText.setText(new SimpleDateFormat("hh:mm d MMM").format(d));
+            this.dateText.setText(new SimpleDateFormat("HH:mm d MMM").format(d));
             this.date = date;
         }
 
