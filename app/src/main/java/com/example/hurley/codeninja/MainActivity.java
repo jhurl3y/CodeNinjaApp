@@ -1,7 +1,9 @@
 package com.example.hurley.codeninja;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -23,8 +25,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.example.hurley.codeninja.contentprovider.NotesContentProvider;
+import com.example.hurley.codeninja.database.NotesTable;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -60,6 +64,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == R.id.action_user) {
+            new AlertDialog.Builder(this)
+                .setTitle(R.string.deleting_notes_title)
+                .setMessage(R.string.deleting_notes_msg)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        getContentResolver().delete(NotesContentProvider.CONTENT_URI, "", null);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -6,4 +6,6 @@
     <string name="delete_all">Delete All Notes</string>
     <string name="desc_hint">So this is your note..</string>
     <string name="title_hint">Title..</string>
+    <string name="deleting_notes_title">Deleting Notes</string>
+    <string name="deleting_notes_msg">Do you really want to delete all your notes?</string>
 </resources>
