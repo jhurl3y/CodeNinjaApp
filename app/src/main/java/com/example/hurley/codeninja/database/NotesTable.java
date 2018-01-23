@@ -32,14 +32,11 @@ public class NotesTable {
 
     public static void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);
+
         database.execSQL("insert into " + TABLE_NOTES + "(" +
                 COLUMN_ID + "," + COLUMN_TITLE + "," + COLUMN_CONTENT + "," +
                 COLUMN_CREATED_AT + "," + COLUMN_UPDATED_AT +
-                ") values(1, 'Note 1', 'This is my first note', '2016-02-03 00:00:00', '2016-02-03 00:00:00')");
-        database.execSQL("insert into " + TABLE_NOTES + "(" +
-                COLUMN_ID + "," + COLUMN_TITLE + "," + COLUMN_CONTENT + "," +
-                COLUMN_CREATED_AT + "," + COLUMN_UPDATED_AT +
-                ") values(2, 'Note 2', 'This is my second note', '2016-02-03 00:00:00', '2015-01-03 00:00:00')");
+                ") values(1, 'Hey! Welcome to the Code Ninja notes app!', 'This is a simple application for demo purposes. You can add a note, edit a note and also delete notes.. I say you are already sick of the word note. Anyways I will leave you to it. Hope you enjoy the talk and any questions just shout!', '2016-01-01 00:00:00', '2016-02-03 00:00:00')");
     }
 
     public static void onUpgrade(SQLiteDatabase database, int oldVersion,
@@ -66,20 +63,5 @@ public class NotesTable {
         this.content = cursor.getString(2);
         this.createdAt = cursor.getString(3);
         this.updatedAt = cursor.getString(4);
-    }
-
-    /**
-     * Return the fields in a ContentValues object, suitable for insertion
-     * into the database.
-     */
-    public ContentValues getContent() {
-        final ContentValues values = new ContentValues();
-        // Note that ID is NOT included here
-        values.put(COLUMN_TITLE, this.title);
-        values.put(COLUMN_CONTENT, this.content);
-        values.put(COLUMN_CREATED_AT, this.createdAt);
-        values.put(COLUMN_UPDATED_AT, this.updatedAt);
-
-        return values;
     }
 }
