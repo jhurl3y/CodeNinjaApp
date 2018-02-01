@@ -33,19 +33,19 @@ public class EditActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(id == -1){
-                    createNote();
-                } else{
-                    editNote();
+            if(id == -1){
+                createNote();
+            } else{
+                editNote();
 
-                    Intent data = new Intent();
-                    data.putExtra("NOTE_TITLE",title);
-                    data.putExtra("NOTE_CONTENT",content);
+                Intent data = new Intent();
+                data.putExtra("NOTE_TITLE",title);
+                data.putExtra("NOTE_CONTENT",content);
 
-                    setResult(RESULT_OK, data);
-                }
+                setResult(RESULT_OK, data);
+            }
 
-                finish();
+            finish();
             }
         });
 
