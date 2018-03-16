@@ -1,4 +1,4 @@
-package com.example.hurley.codeninja;
+package mynotes.example.hurley.codeninja;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
@@ -26,7 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
 
-import com.example.hurley.codeninja.contentprovider.NotesContentProvider;
+import mynotes.example.hurley.codeninja.contentprovider.NotesContentProvider;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 

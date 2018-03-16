@@ -1,4 +1,4 @@
-package com.example.hurley.codeninja.contentprovider;
+package mynotes.example.hurley.codeninja.contentprovider;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,8 +13,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.example.hurley.codeninja.database.NotesDatabaseHelper;
-import com.example.hurley.codeninja.database.NotesTable;
+import mynotes.example.hurley.codeninja.database.NotesDatabaseHelper;
+import mynotes.example.hurley.codeninja.database.NotesTable;
 
 
 public class NotesContentProvider extends ContentProvider {

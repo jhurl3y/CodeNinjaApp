@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hurley.codeninja">
+    package="mynotes.example.hurley.codeninja">
 
     <application
         android:allowBackup="true"
@@ -12,22 +12,22 @@
         <activity
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".MainActivity">
+            android:name="mynotes.example.hurley.codeninja.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditActivity"
+            android:name="mynotes.example.hurley.codeninja.EditActivity"
             android:label="@string/title_activity_edit"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".ViewActivity"
+            android:name="mynotes.example.hurley.codeninja.ViewActivity"
             android:label="@string/title_activity_view"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <provider
-            android:name=".contentprovider.NotesContentProvider"
+            android:name="mynotes.example.hurley.codeninja.contentprovider.NotesContentProvider"
             android:authorities="com.example.hurley.notes.contentprovider" >
         </provider>
     </application>

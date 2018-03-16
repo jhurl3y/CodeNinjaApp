@@ -1,4 +1,4 @@
-package com.example.hurley.codeninja;
+package mynotes.example.hurley.codeninja;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.hurley.codeninja.contentprovider.NotesContentProvider;
-import com.example.hurley.codeninja.database.NotesTable;
+import mynotes.example.hurley.codeninja.contentprovider.NotesContentProvider;
+import mynotes.example.hurley.codeninja.database.NotesTable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

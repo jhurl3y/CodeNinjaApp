@@ -1,4 +1,4 @@
-package com.example.hurley.codeninja;
+package mynotes.example.hurley.codeninja;
 
 import org.junit.Test;
 

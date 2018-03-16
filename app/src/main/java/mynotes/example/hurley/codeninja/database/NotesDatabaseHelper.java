@@ -1,4 +1,4 @@
-package com.example.hurley.codeninja.database;
+package mynotes.example.hurley.codeninja.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

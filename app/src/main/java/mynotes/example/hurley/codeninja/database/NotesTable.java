@@ -1,6 +1,5 @@
-package com.example.hurley.codeninja.database;
+package mynotes.example.hurley.codeninja.database;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -36,7 +35,7 @@ public class NotesTable {
         database.execSQL("insert into " + TABLE_NOTES + "(" +
                 COLUMN_ID + "," + COLUMN_TITLE + "," + COLUMN_CONTENT + "," +
                 COLUMN_CREATED_AT + "," + COLUMN_UPDATED_AT +
-                ") values(1, 'Hey! Welcome to the Code Ninja notes app!', 'This is a simple application for demo purposes. You can add a note, edit a note and also delete notes.. I say you are already sick of the word note. Anyways I will leave you to it. Hope you enjoy the talk and any questions just shout!', '2016-01-01 00:00:00', '2016-02-03 00:00:00')");
+                ") values(1, 'Hey! Welcome to My Notes!', 'This is the simplest notes app ever. You can add a note, edit a note and also delete notes.. I say you are already sick of the word note. Anyways I will leave you to it. Enjoy the app!', '2016-01-01 00:00:00', '2016-02-03 00:00:00')");
     }
 
     public static void onUpgrade(SQLiteDatabase database, int oldVersion,

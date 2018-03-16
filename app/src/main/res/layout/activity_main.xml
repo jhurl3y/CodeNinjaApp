@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/colorBackgroundWhite"
-    tools:context=".MainActivity">
+    tools:context="mynotes.example.hurley.codeninja.MainActivity">
 
     <include
         android:id="@+id/toolbarMain"

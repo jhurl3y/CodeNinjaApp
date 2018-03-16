@@ -1,4 +1,4 @@
-package com.example.hurley.codeninja;
+package mynotes.example.hurley.codeninja;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
